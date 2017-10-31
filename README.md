@@ -1,8 +1,6 @@
-# Project Title
 # MailboxAnalyzer
-Mailbox Analyzer
-
-One Paragraph of project description goes here
+## Flow
+![Flow](https://github.com/baudelaine/MailboxAnalyzer/blob/master/mailbox.analyzer.flow.jpg)
 
 ## Getting Started
 
