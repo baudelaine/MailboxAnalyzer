@@ -5,7 +5,7 @@
 
 ### Prerequisites
 
-Download and install the cf command from [Cloud Foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
 
 Download [curl](https://curl.haxx.se/download.html) command, unzip it and copy i386 content in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
