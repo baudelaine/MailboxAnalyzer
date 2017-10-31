@@ -206,7 +206,7 @@ applications:
 ```
 
 If you changed Discovery Environment name and/or Discovery Collection name then update WebContent/res/conf.properties accordingly.
-Otherwise jump to Deploy Section.
+Otherwise jump to [Deploy Section](#deploy-the-application).
 ```
 VCAP_SERVICES=
 CLEAN_DCOLL_AT_STARTUP=true
