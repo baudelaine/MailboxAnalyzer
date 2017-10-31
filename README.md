@@ -90,13 +90,7 @@ cf csk nlu0 user0
 Check that service key has been created:
 > Syntax: cf sk ${service_instance}
 ```
-cf sk nl0
-```
-
-At any time you should be able to get your credential (url, port, username, password...) for one of your service instance.
-> Syntax: cf service-key ${service_instance} ${service_key}
-```
-cf service-key dsc0 user0
+cf sk nlu0
 ```
 
 ### Create Discovery service:
@@ -116,6 +110,13 @@ Check that service key has been created:
 ```
 cf sk dsc0
 ```
+
+At any time you should be able to get your credential (url, port, username, password...) for one of your service instance.
+> Syntax: cf service-key ${service_instance} ${service_key}
+```
+cf service-key dsc0 user0
+```
+
 ### Create **coll0** Collection for Discovery service:
 
 Before being able to create a collection 2 steps have to be completed:
@@ -145,7 +146,7 @@ curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/config
 
 Now, you should be ready to create the collection.
 
-Create collection for Discovery service:
+Create collection **coll0** for Discovery service:
 ```
 curl -X POST -H "Content-Type: application/json" -u ${username}:${password} -d '{"name": "coll0", "configuration_id":"${configuration_id}" , "language": "en_us"}' ${url}/v1/environments/${environment_id}/collections?version=2017-09-01
 ```
@@ -185,9 +186,9 @@ cf s
 
 Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip) unzip and change to this directory (e.g.: MailboxAnalyzer-master).
 
-> Now if you stand in the correct directory, you should be able to list directory such as WebContent and file such as manifest.yml.
+> Now if you stand in the correct directory, you should be able to list directory such as **WebContent** and file such as **manifest.yml**.
 
-Before deploying the application you need to choose a unique name (in eu-gb.mybluemix.net) for your application and update the manifest.yml accordingly by substituting ${appName} with the name of you choice:
+Before deploying the application you need to choose a **unique name** (in eu-gb.mybluemix.net) for your application and update the manifest.yml accordingly by substituting **${appName}** with the name of your choice:
 ```
 applications:
 - host: ${appName}
@@ -204,7 +205,7 @@ applications:
   - wvc0
 ```
 
-If you changed Discovery Environment name and/or Discovery name then update WebContent/res/conf.properties accordingly.
+If you changed Discovery Environment name and/or Discovery Collection name then update WebContent/res/conf.properties accordingly.
 Otherwise jump to Deploy Section.
 ```
 VCAP_SERVICES=
