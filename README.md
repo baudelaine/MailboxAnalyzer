@@ -7,7 +7,7 @@
 
 Download and install the cf command from [Cloud Foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
 
-Download [curl](https://curl.haxx.se/download.html),  command unzip it and copy i386 content in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
+Download [curl](https://curl.haxx.se/download.html) command, unzip it and copy i386 content in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
 Download [jq](https://stedolan.github.io/jq/download/) command rename it from jq-win64 to jq and copy it in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
@@ -48,13 +48,13 @@ Now you should know both your organization and your space in one Region and your
 
 ### Setup Environment
 
-Connect to Bluemix US SOUTH Region:
+Connect to Bluemix US South Region:
 ```
-cf l -a https://api.ng.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${org}
+cf l -a https://api.ng.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}
 ```
 or connect to Bluemix United Kingdom Region:
 ```
-cf l -a https://api.eu-gb.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${org}
+cf l -a https://api.eu-gb.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}
 ```
 
 ### Create Tone Analyzer service:
@@ -64,7 +64,7 @@ cf cs tone_analyzer standard ta0
 ```
 
 Create service key (credential) to grant access to service:
-> Syntax: cf csk ${service_instance} {service_key}
+> Syntax: cf csk ${service_instance} ${service_key}
 ```
 cf csk ta0 user0
 ```
@@ -82,7 +82,7 @@ cf cs natural-language-understanding free nlu0
 ```
 
 Create service key (credential) to grant access to service:
-> Syntax: cf csk ${service_instance} {service_key}
+> Syntax: cf csk ${service_instance} ${service_key}
 ```
 cf csk nlu0 user0
 ```
@@ -106,7 +106,7 @@ cf cs discovery lite dsc0
 ```
 
 Create service key (credential) to grant access to service:
-> Syntax: cf csk ${service_instance} {service_key}
+> Syntax: cf csk ${service_instance} ${service_key}
 ```
 cf csk dsc0 user0
 ```
