@@ -47,9 +47,11 @@ Now you should know both your organization and your space in one Region and your
 ### Setup Environment
 
 Connect to Bluemix US South Region:
-```cf l -a https://api.ng.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}```
+```
+cf l -a https://api.ng.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}```
 or connect to Bluemix United Kingdom Region:
-```cf l -a https://api.eu-gb.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}```
+```
+cf l -a https://api.eu-gb.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}```
 
 ### Create Tone Analyzer service:
 > Syntax: cf cs ${service} ${plan} ${service_instance}
