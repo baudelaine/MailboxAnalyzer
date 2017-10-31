@@ -9,7 +9,7 @@ Download and install the cf command from [Cloud Foundry](https://docs.cloudfound
 
 Download [curl](https://curl.haxx.se/download.html) command, unzip it and copy i386 content in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
-Download [jq](https://stedolan.github.io/jq/download/) command rename it from jq-win64 to jq and copy it in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
+Download [jq](https://stedolan.github.io/jq/download/) command, rename it from jq-win64 to jq and copy it in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
 Open a Windows command prompt as administrator or a terminal on other platform.
 
@@ -75,7 +75,7 @@ Check that service key has been created:
 cf sk ta0
 ```
 
-### Create Natural Language Understanding service:
+### Create Natural Language Understanding service:
 > Syntax: cf cs ${service} ${plan} ${service_instance}
 ```
 cf cs natural-language-understanding free nlu0
@@ -160,11 +160,11 @@ curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/collec
 ### Create Visual Recognition service:
 > Syntax: cf cs ${service} ${plan} ${service_instance}
 ```
-cf cs watson_vision_combined free wc0
+cf cs watson_vision_combined free wvc0
 ```
 
 Create service key (credential) to grant access to service:
-> Syntax: cf csk ${service_instance} {service_key}
+> Syntax: cf csk ${service_instance} ${service_key}
 ```
 cf csk wvc0 user0
 ```
