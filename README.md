@@ -28,12 +28,10 @@ jq
 
 **!!! WARNING !!!**
 
-*Every further variables - including ${} or <> - like ${something} or \<something\>
-have to be substituted with your own environment variables:*
+Every further variables - including ${} - like ${something} have to be substituted with your own environment variables:
 
 * e.g.
   * ${userid} will become yourUserid
-  * \<org\> will become yourOrg
 
 **!!! WARNING !!!**
 
