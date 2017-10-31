@@ -134,7 +134,7 @@ Get **environment_id** for Discovery service:
 curl -u ${username}:${password} "${url}/v1/environments?version=2017-09-01" | jq --arg ENV env0 '.environments[] | select(.name == $ENV) | .environment_id'
 ```
 
-Create **configuration** for Discovery service with **environment_id* from above:
+Create **configuration** for Discovery service with **environment_id** from above:
 ```
 curl -u ${username}:${password} ${url}/v1/environments/${environment_id}/configurations?version=2017-09-01
 ```
@@ -176,7 +176,7 @@ Check that service key has been created:
 cf sk wvc0
 ```
 
-> You are done with environment setup. Now at least for Watson services should be created (ta0, nlu0, dsc0 and wvc0) in your space.
+> You are done with environment setup. Now at least for Watson services should be created (**ta0, nlu0, dsc0 and wvc0**) in your space.
 Check it with:
 ```
 cf s
@@ -184,7 +184,7 @@ cf s
 
 ### Setup applications
 
-Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip) unzip and change to this directory (e.g.: MailboxAnalyzer-master).
+Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip) unzip and change to this newly created directory (e.g.: MailboxAnalyzer-master).
 
 > Now if you stand in the correct directory, you should be able to list directory such as **WebContent** and file such as **manifest.yml**.
 
