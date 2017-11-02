@@ -69,10 +69,10 @@ public class AnalyzeServlet extends HttpServlet {
 
 	NaturalLanguageUnderstanding nlu;
 	ToneAnalyzer ta;
-	Discovery d;
-	VisualRecognition vr;
-	String dEnvId;
-	String dCollId;
+	Discovery dsc;
+	VisualRecognition wvc;
+	String dscEnvId;
+	String dscCollId;
 	String mailsPath;
 
     /**
@@ -100,9 +100,9 @@ public class AnalyzeServlet extends HttpServlet {
 			datas.put("FROM", this.getServletName());
 			mailsPath = getServletContext().getRealPath("/res/mails");
 
-			d = (Discovery) request.getServletContext().getAttribute("d");
-			dEnvId = (String) request.getServletContext().getAttribute("dEnvId");
-			dCollId = (String) request.getServletContext().getAttribute("dCollId");
+			dsc = (Discovery) request.getServletContext().getAttribute("dsc");
+			dscEnvId = (String) request.getServletContext().getAttribute("dscEnvId");
+			dscCollId = (String) request.getServletContext().getAttribute("dscCollId");
 
 			if(ServletFileUpload.isMultipartContent(request)){
 
@@ -163,7 +163,7 @@ public class AnalyzeServlet extends HttpServlet {
 						nlu = (NaturalLanguageUnderstanding) request.getServletContext().getAttribute("nlu");
 						callNLU(mail);
 	
-						vr = (VisualRecognition) request.getServletContext().getAttribute("vr");
+						wvc = (VisualRecognition) request.getServletContext().getAttribute("wvc");
 	
 						if(mail.getPicture() != null){
 							callVR(mail);
@@ -178,7 +178,7 @@ public class AnalyzeServlet extends HttpServlet {
 						}
 	
 						if(mail.getdId() != null){
-							callD(mail);
+							callDSC(mail);
 						}
 					}
 				}
@@ -188,15 +188,7 @@ public class AnalyzeServlet extends HttpServlet {
 
 		catch(JsonMappingException e){
 			Properties props = (Properties) getServletContext().getAttribute("props");
-			datas.put("UPLOAD_USAGE", props.get("UPLOAD_USAGE"));
-			datas.put("ANALYZE_USAGE", props.get("ANALYZE_USAGE"));
-			datas.put("WARNING_USAGE", props.get("WARNING_USAGE"));
-			datas.put("UPLOAD_EXAMPLE", props.get("UPLOAD_EXAMPLE"));
-			datas.put("ANALYZE_EXAMPLE", props.get("ANALYZE_EXAMPLE"));
 			e.printStackTrace();
-//			datas.put("EXAMPLE", ( (String) props.get("EXAMPLE")).replaceAll("\\\"", "\""));
-//			datas.put("EXAMPLE", props.get("EXAMPLE"));
-//			datas.put("EXAMPLE", ( (String) props.get("EXAMPLE")).replaceAll("\\\\", ""));
 
 		}
 
@@ -251,9 +243,9 @@ public class AnalyzeServlet extends HttpServlet {
 
 		}
 
-		CreateDocumentRequest.Builder builder = new CreateDocumentRequest.Builder(dEnvId, dCollId)
+		CreateDocumentRequest.Builder builder = new CreateDocumentRequest.Builder(dscEnvId, dscCollId)
 				.file(in, mt);
-		CreateDocumentResponse result = d.createDocument(builder.build()).execute();
+		CreateDocumentResponse result = dsc.createDocument(builder.build()).execute();
 
 		ObjectMapper mapper = new ObjectMapper();
 
@@ -273,11 +265,11 @@ public class AnalyzeServlet extends HttpServlet {
 		List<String> fields = new ArrayList<String>();
 		fields.add("extracted_metadata");
 
-    	QueryRequest.Builder queryBuilder = new QueryRequest.Builder(dEnvId, dCollId)
+    	QueryRequest.Builder queryBuilder = new QueryRequest.Builder(dscEnvId, dscCollId)
     			.count(100)
     			.returnFields(fields);
 
-    	QueryResponse queryResponse = d.query(queryBuilder.build()).execute();
+    	QueryResponse queryResponse = dsc.query(queryBuilder.build()).execute();
 
     	ObjectMapper mapper = new ObjectMapper();
 
@@ -306,7 +298,7 @@ public class AnalyzeServlet extends HttpServlet {
 				.images(data, mail.getPicture())
 				.build();
 		
-		VisualClassification visualClassification = vr.classify(classifyImagesOptions).execute();
+		VisualClassification visualClassification = wvc.classify(classifyImagesOptions).execute();
 		
 		String result = visualClassification.toString();
 		
@@ -328,7 +320,7 @@ public class AnalyzeServlet extends HttpServlet {
 				.images(data, mail.getFace())
 				.build();
 
-		DetectedFaces detectedFaces = vr.detectFaces(options).execute();
+		DetectedFaces detectedFaces = wvc.detectFaces(options).execute();
 		
 		String result = detectedFaces.toString();
 		
@@ -350,7 +342,7 @@ public class AnalyzeServlet extends HttpServlet {
 				.images(data, mail.getTip())
 				.build();
 
-		RecognizedText recognizedText = vr.recognizeText(options).execute();
+		RecognizedText recognizedText = wvc.recognizeText(options).execute();
 
 		String result = recognizedText.toString();
 		
@@ -362,16 +354,16 @@ public class AnalyzeServlet extends HttpServlet {
 	}
 
 
-	protected QueryResponse callD(Mail mail) throws IOException{
+	protected QueryResponse callDSC(Mail mail) throws IOException{
 
 		List<String> fields = new ArrayList<String>();
 		fields.add("extracted_metadata");
 
-    	QueryRequest.Builder queryBuilder = new QueryRequest.Builder(dEnvId, dCollId)
+    	QueryRequest.Builder queryBuilder = new QueryRequest.Builder(dscEnvId, dscCollId)
     			.aggregation("term(enriched_text)")
     			.filter("_id:" + mail.getdId());
 
-    	QueryResponse queryResponse = d.query(queryBuilder.build()).execute();
+    	QueryResponse queryResponse = dsc.query(queryBuilder.build()).execute();
     	
     	String result = queryResponse.toString();
     	

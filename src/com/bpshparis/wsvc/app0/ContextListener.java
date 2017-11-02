@@ -48,10 +48,10 @@ public class ContextListener implements ServletContextListener {
 	String realPath;
 	Properties props = new Properties();
 	ToneAnalyzer ta;
-	Discovery d;
-	String dEnvId;
-	String dCollId;
-	VisualRecognition vr;
+	Discovery dsc;
+	String dscEnvId;
+	String dscCollId;
+	VisualRecognition wvc;
 	
     /**
      * Default constructor. 
@@ -85,20 +85,20 @@ public class ContextListener implements ServletContextListener {
     			System.out.println("TA has been initialized...");
 				arg0.getServletContext().setAttribute("ta", ta);
     				
-				initD();
-    			System.out.println("D has been initialized...");
-				arg0.getServletContext().setAttribute("d", d);
-				arg0.getServletContext().setAttribute("dEnvId", dEnvId);
-				arg0.getServletContext().setAttribute("dCollId", dCollId);
+				initDSC();
+    			System.out.println("DSC has been initialized...");
+				arg0.getServletContext().setAttribute("dsc", dsc);
+				arg0.getServletContext().setAttribute("dscEnvId", dscEnvId);
+				arg0.getServletContext().setAttribute("dscCollId", dscCollId);
 				
     			if(props.getProperty("CLEAN_DCOLL_AT_STARTUP").equalsIgnoreCase("true")){
         			System.out.println("Cleaning Discovery collections...");
     				cleanDColl();
     			}
 				
-				initVR();
-    			System.out.println("VR has been initialized...");
-				arg0.getServletContext().setAttribute("vr", vr);
+				initWVC();
+    			System.out.println("WVC has been initialized...");
+				arg0.getServletContext().setAttribute("wvc", wvc);
 
     			
     		} catch (Exception e) {
@@ -207,16 +207,16 @@ public class ContextListener implements ServletContextListener {
     }    
 
     @SuppressWarnings("unchecked")
-	public void initD() throws JsonParseException, JsonMappingException, IOException{
+	public void initDSC() throws JsonParseException, JsonMappingException, IOException{
 
-    	String serviceName = props.getProperty("D_NAME");
+    	String serviceName = props.getProperty("DSC_NAME");
     	
 		ObjectMapper mapper = new ObjectMapper();
 		
 		String url = "";
 		String username = "";
 		String password = "";
-		String version = props.getProperty("D_VERSION").split("=")[1];
+		String version = props.getProperty("DSC_VERSION").split("=")[1];
 		
 		Map<String, Object> input = mapper.readValue(vcap_services, new TypeReference<Map<String, Object>>(){});
 		
@@ -234,48 +234,77 @@ public class ContextListener implements ServletContextListener {
 			}
 		}
 		
-		d = new Discovery(version);
-		d.setEndPoint(url);
-		d.setUsernameAndPassword(username, password);
-		d.setEndPoint(url);
+		dsc = new Discovery(version);
+		dsc.setEndPoint(url);
+		dsc.setUsernameAndPassword(username, password);
+		dsc.setEndPoint(url);
 		
 		GetEnvironmentsRequest envRequest = new GetEnvironmentsRequest.Builder().build();
-		GetEnvironmentsResponse envResponse = d.getEnvironments(envRequest).execute();
+		GetEnvironmentsResponse envResponse = dsc.getEnvironments(envRequest).execute();
 		
 		Map<String, Object> envMap = mapper.readValue(envResponse.toString(), new TypeReference<Map<String, Object>>(){});
 
 		List<Map<String, String>> envs = (List<Map<String, String>>) envMap.get("environments");
 
 		for(Map<String, String> e: envs){
-			if(e.get("name").equalsIgnoreCase(props.getProperty("D_ENV_NAME"))){
-				dEnvId = (e.get("environment_id"));
+			if(e.get("name").equalsIgnoreCase(props.getProperty("DSC_ENV_NAME"))){
+				dscEnvId = (e.get("environment_id"));
 			}
 		}
 
-		GetCollectionsRequest collRequest = new GetCollectionsRequest.Builder(dEnvId).build();
-		GetCollectionsResponse collResponse = d.getCollections(collRequest).execute();		
+		GetCollectionsRequest collRequest = new GetCollectionsRequest.Builder(dscEnvId).build();
+		GetCollectionsResponse collResponse = dsc.getCollections(collRequest).execute();		
 
 		Map<String, Object> collMap = mapper.readValue(collResponse.toString(), new TypeReference<Map<String, Object>>(){});
 
 		List<Map<String, String>> colls = (List<Map<String, String>>) collMap.get("collections");
 
 		for(Map<String, String> e: colls){
-			if(e.get("name").equalsIgnoreCase(props.getProperty("D_COLL_NAME"))){
-				dCollId = (e.get("collection_id"));
+			if(e.get("name").equalsIgnoreCase(props.getProperty("DSC_COLL_NAME"))){
+				dscCollId = (e.get("collection_id"));
 			}
 		}
 		
-		System.out.println(d.getName() + " " + d.getEndPoint() + " " + dEnvId + " " + dCollId);
+		System.out.println(dsc.getName() + " " + dsc.getEndPoint() + " " + dscEnvId + " " + dscCollId);
 		
 		return;
     }
 
-    public void initVR(){
+    @SuppressWarnings("unchecked")
+	public void initWVC() throws JsonParseException, JsonMappingException, IOException{
     	
-    	vr = new VisualRecognition(VisualRecognition.VERSION_DATE_2016_05_20);
-		vr.setEndPoint(props.getProperty("VR_ENDPOINT"));
-		vr.setApiKey(props.getProperty("VR_API_KEY"));
     	
+    	String serviceName = props.getProperty("WVC_NAME");
+    	
+		ObjectMapper mapper = new ObjectMapper();
+		
+		String url = "";
+		String api_key = "";
+//		String version = props.getProperty("WVC_VERSION").split("=")[1];
+		
+		Map<String, Object> input = mapper.readValue(vcap_services, new TypeReference<Map<String, Object>>(){});
+		
+		List<Map<String, Object>> l0s = (List<Map<String, Object>>) input.get(serviceName);
+		
+		for(Map<String, Object> l0: l0s){
+			for(Map.Entry<String, Object> e: l0.entrySet()){
+				if(e.getKey().equalsIgnoreCase("credentials")){
+					System.out.println(e.getKey() + "=" + e.getValue());
+					Map<String, Object> credential = (Map<String, Object>) e.getValue();
+					url = (String) credential.get("url");
+					api_key = (String) credential.get("api_key");
+				}
+			}
+		}
+		
+    	wvc = new VisualRecognition(VisualRecognition.VERSION_DATE_2016_05_20);
+		wvc.setEndPoint(url);
+		wvc.setApiKey(api_key);
+
+		System.out.println(wvc.getName() + " " + wvc.getEndPoint());
+		
+		return;    	
+
     }
     
     @SuppressWarnings({ "unchecked", "unused" })
@@ -284,11 +313,11 @@ public class ContextListener implements ServletContextListener {
 		List<String> fields = new ArrayList<String>();
 		fields.add("extracted_metadata");
     	
-    	QueryRequest.Builder queryBuilder = new QueryRequest.Builder(dEnvId, dCollId)
+    	QueryRequest.Builder queryBuilder = new QueryRequest.Builder(dscEnvId, dscCollId)
     			.count(100)
     			.returnFields(fields);
     	
-    	QueryResponse queryResponse = d.query(queryBuilder.build()).execute();
+    	QueryResponse queryResponse = dsc.query(queryBuilder.build()).execute();
     	
     	System.out.println("queryResponse=" + queryResponse);
     	
@@ -307,8 +336,8 @@ public class ContextListener implements ServletContextListener {
     	System.out.println("docIds=" + docIds);
     	
     	for(String docId: docIds){
-	    	DeleteDocumentRequest deleteRequest = new DeleteDocumentRequest.Builder(dEnvId, dCollId, docId).build();
-	    	DeleteDocumentResponse deleteResponse = d.deleteDocument(deleteRequest).execute();
+	    	DeleteDocumentRequest deleteRequest = new DeleteDocumentRequest.Builder(dscEnvId, dscCollId, docId).build();
+	    	DeleteDocumentResponse deleteResponse = dsc.deleteDocument(deleteRequest).execute();
     	}
     	
     }
