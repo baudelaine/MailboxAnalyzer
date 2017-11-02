@@ -5,11 +5,11 @@
 
 ### Prerequisites
 
-Download and install the cf command from [Cloud Foundry](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html)
+Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
 
-Download [curl](https://curl.haxx.se/download.html),  command unzip it and copy i386 content in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
+Download [curl](https://curl.haxx.se/download.html) command, unzip it and copy i386 content in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
-Download [jq](https://stedolan.github.io/jq/download/) command rename it from jq-win64 to jq and copy it in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
+Download [jq](https://stedolan.github.io/jq/download/) command, rename it from jq-win64 to jq and copy it in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
 Open a Windows command prompt as administrator or a terminal on other platform.
 
@@ -28,12 +28,10 @@ jq
 
 **!!! WARNING !!!**
 
-*Every further variables - including ${} or <> - like ${something} or \<something\>
-have to be substituted with your own environment variables:*
+Every further variables - including ${} - like ${something} have to be substituted with your own environment variables:
 
 * e.g.
   * ${userid} will become yourUserid
-  * \<org\> will become yourOrg
 
 **!!! WARNING !!!**
 
@@ -48,13 +46,13 @@ Now you should know both your organization and your space in one Region and your
 
 ### Setup Environment
 
-Connect to Bluemix US SOUTH Region:
+Connect to Bluemix US South Region:
 ```
-cf l -a https://api.ng.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${org}
+cf l -a https://api.ng.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}
 ```
 or connect to Bluemix United Kingdom Region:
 ```
-cf l -a https://api.eu-gb.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${org}
+cf l -a https://api.eu-gb.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}
 ```
 
 ### Create Tone Analyzer service:
@@ -64,7 +62,7 @@ cf cs tone_analyzer standard ta0
 ```
 
 Create service key (credential) to grant access to service:
-> Syntax: cf csk ${service_instance} {service_key}
+> Syntax: cf csk ${service_instance} ${service_key}
 ```
 cf csk ta0 user0
 ```
@@ -75,14 +73,14 @@ Check that service key has been created:
 cf sk ta0
 ```
 
-### Create Natural Language Understanding service:
+### Create Natural Language Understanding service:
 > Syntax: cf cs ${service} ${plan} ${service_instance}
 ```
 cf cs natural-language-understanding free nlu0
 ```
 
 Create service key (credential) to grant access to service:
-> Syntax: cf csk ${service_instance} {service_key}
+> Syntax: cf csk ${service_instance} ${service_key}
 ```
 cf csk nlu0 user0
 ```
@@ -90,13 +88,7 @@ cf csk nlu0 user0
 Check that service key has been created:
 > Syntax: cf sk ${service_instance}
 ```
-cf sk nl0
-```
-
-At any time you should be able to get your credential (url, port, username, password...) for one of your service instance.
-> Syntax: cf service-key ${service_instance} ${service_key}
-```
-cf service-key dsc0 user0
+cf sk nlu0
 ```
 
 ### Create Discovery service:
@@ -106,7 +98,7 @@ cf cs discovery lite dsc0
 ```
 
 Create service key (credential) to grant access to service:
-> Syntax: cf csk ${service_instance} {service_key}
+> Syntax: cf csk ${service_instance} ${service_key}
 ```
 cf csk dsc0 user0
 ```
@@ -116,6 +108,13 @@ Check that service key has been created:
 ```
 cf sk dsc0
 ```
+
+At any time you should be able to get your credential (url, port, username, password...) for one of your service instance.
+> Syntax: cf service-key ${service_instance} ${service_key}
+```
+cf service-key dsc0 user0
+```
+
 ### Create **coll0** Collection for Discovery service:
 
 Before being able to create a collection 2 steps have to be completed:
@@ -133,7 +132,7 @@ Get **environment_id** for Discovery service:
 curl -u ${username}:${password} "${url}/v1/environments?version=2017-09-01" | jq --arg ENV env0 '.environments[] | select(.name == $ENV) | .environment_id'
 ```
 
-Create **configuration** for Discovery service with **environment_id* from above:
+Create **configuration** for Discovery service with **environment_id** from above:
 ```
 curl -u ${username}:${password} ${url}/v1/environments/${environment_id}/configurations?version=2017-09-01
 ```
@@ -145,7 +144,7 @@ curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/config
 
 Now, you should be ready to create the collection.
 
-Create collection for Discovery service:
+Create collection **coll0** for Discovery service:
 ```
 curl -X POST -H "Content-Type: application/json" -u ${username}:${password} -d '{"name": "coll0", "configuration_id":"${configuration_id}" , "language": "en_us"}' ${url}/v1/environments/${environment_id}/collections?version=2017-09-01
 ```
@@ -160,11 +159,11 @@ curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/collec
 ### Create Visual Recognition service:
 > Syntax: cf cs ${service} ${plan} ${service_instance}
 ```
-cf cs watson_vision_combined free wc0
+cf cs watson_vision_combined free wvc0
 ```
 
 Create service key (credential) to grant access to service:
-> Syntax: cf csk ${service_instance} {service_key}
+> Syntax: cf csk ${service_instance} ${service_key}
 ```
 cf csk wvc0 user0
 ```
@@ -175,7 +174,7 @@ Check that service key has been created:
 cf sk wvc0
 ```
 
-> You are done with environment setup. Now at least for Watson services should be created (ta0, nlu0, dsc0 and wvc0) in your space.
+> You are done with environment setup. Now at least for Watson services should be created (**ta0, nlu0, dsc0 and wvc0**) in your space.
 Check it with:
 ```
 cf s
@@ -183,11 +182,11 @@ cf s
 
 ### Setup applications
 
-Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip) unzip and change to this directory (e.g.: MailboxAnalyzer-master).
+Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip) unzip and change to this newly created directory (e.g.: MailboxAnalyzer-master).
 
-> Now if you stand in the correct directory, you should be able to list directory such as WebContent and file such as manifest.yml.
+> Now if you stand in the correct directory, you should be able to list directory such as **WebContent** and file such as **manifest.yml**.
 
-Before deploying the application you need to choose a unique name (in eu-gb.mybluemix.net) for your application and update the manifest.yml accordingly by substituting ${appName} with the name of you choice:
+Before deploying the application you need to choose a **unique name** (in eu-gb.mybluemix.net) for your application and update the manifest.yml accordingly by substituting **${appName}** with the name of your choice:
 ```
 applications:
 - host: ${appName}
@@ -204,8 +203,8 @@ applications:
   - wvc0
 ```
 
-If you changed Discovery Environment name and/or Discovery name then update WebContent/res/conf.properties accordingly.
-Otherwise jump to Deploy Section.
+If you changed Discovery Environment name and/or Discovery Collection name then update WebContent/res/conf.properties accordingly.
+Otherwise jump to [Deploy Section](#deploy-the-application).
 ```
 VCAP_SERVICES=
 CLEAN_DCOLL_AT_STARTUP=true
