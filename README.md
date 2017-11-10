@@ -124,7 +124,7 @@ Before being able to create a collection 2 steps have to be completed:
 
 Create **env0** environment for Discovery service:
 ```
-curl -X POST -u ${username}:${password} -H"Content-Type: application/json" -d '{"name": "env0"}' "${url}/v1/environments?version=2017-09-01"
+curl -X POST -u ${username}:${password} -H "Content-Type: application/json" -d '{"name": "env0"}' "${url}/v1/environments?version=2017-09-01"
 ```
 
 Get **environment_id** for Discovery service:
