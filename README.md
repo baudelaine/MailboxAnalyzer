@@ -46,6 +46,15 @@ Now you should know both your organization and your space in one Region and your
 
 ### Setup Environment
 
+If testing with Windows and don't feel confortable with command line download [envmgt.bat](envmgt.bat), edit and set accordingly:
+
+```
+set userid=
+set password=
+set space=
+set org=
+```
+
 Connect to Bluemix US South Region:
 ```
 cf l -a https://api.ng.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}
