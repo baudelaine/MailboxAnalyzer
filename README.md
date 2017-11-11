@@ -7,9 +7,9 @@
 
 Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
 
-Download [curl](https://curl.haxx.se/download.html) command, unzip it and copy curl.exe, libcurl.dll and curl-ca-bundle.crt in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
+If testing with Windows download both [curl and jq](wintools.zip) commands and unzip it in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
-Download [jq](https://stedolan.github.io/jq/download/) command, rename it from jq-win64 to jq and copy it in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
+For other platforms download and install [curl](https://curl.haxx.se/download.html) and [jq](https://stedolan.github.io/jq/download/) commands.
 
 Open a Windows command prompt as administrator or a terminal on other platform.
 
