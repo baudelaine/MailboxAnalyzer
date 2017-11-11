@@ -2,10 +2,10 @@
 setlocal ENABLEEXTENSIONS
 set ME=%~n0
 set PARENT=%~dp0
-set userid=sebastien.gautier@fr.ibm.com
-set password=j1mm4p6p
-set space=devuk
-set org=sebastien.gautier@fr.ibm.com
+set userid=
+set password=
+set space=
+set org=
 set svcKeyName=user0
 set appName=app0
 set svc[0]=tone_analyzer standard ta0
