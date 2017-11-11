@@ -46,7 +46,7 @@ Now you should know both your organization and your space in one Region and your
 
 ### Setup Environment
 
-If testing with Windows and don't feel confortable with command line download [envmgt.bat](envmgt.bat), edit and set accordingly:
+If testing with Windows and don't feel confortable with command line download [envmgt.bat](https://github.com/baudelaine/MailboxAnalyzer/blob/master/envmgt.bat), edit and set accordingly:
 
 ```
 set userid=
