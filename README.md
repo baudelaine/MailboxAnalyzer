@@ -1,7 +1,10 @@
-# MailboxAnalyzer
+# Mailbox Analyzer
 
 ## Flow
 ![Flow](mailbox.analyzer.flow.jpg)
+
+### About IBM Cloud Watson services used in the application
+![](ta50x.png)
 
 ### Setup Environment
 
