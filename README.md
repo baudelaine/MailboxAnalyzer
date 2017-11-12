@@ -210,7 +210,7 @@ curl -X POST -u ${username}:${password} -H "Content-Type: application/json" -d "
 
 Get **environment_id** for Discovery service:
 ```
-curl -u ${username}:${password} "${url}/v1/environments?version=${version}" | jq --arg ENV env0 ".environments[] | select(.name == $ENV) | .environment_id"
+curl -u ${username}:${password} "${url}/v1/environments?version=${version}" | jq -r --arg ENV env0 ".environments[] | select(.name == $ENV) | .environment_id"
 ```
 
 Create **configuration** for Discovery service with **environment_id** from above:
@@ -220,7 +220,7 @@ curl -u ${username}:${password} ${url}/v1/environments/${environment_id}/configu
 
 Get **configuration_id** for Discovery service
 ```
-curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/configurations?version=${version}" | jq ".configurations[] | .configuration_id"
+curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/configurations?version=${version}" | jq -r ".configurations[] | .configuration_id"
 ```
 
 Now, you should be ready to create the collection.
@@ -232,7 +232,7 @@ curl -X POST -H "Content-Type: application/json" -u ${username}:${password} -d "
 
 Get collection_id for Discovery service:
 ```
-curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/collections?version=${version}" | jq '.collections[] | .collection_id'
+curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/collections?version=${version}" | jq -r ".collections[] | .collection_id"
 ```
 
 > You won't need your configuration_id nor environment_id, neither  configuration_id for further use but keep **env0** and **coll0** in mind.
