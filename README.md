@@ -32,6 +32,9 @@
 
 > **Visual Recognition** find meaning in visual content! Analyze images for scenes, objects, faces, and other content. Choose a default model off the shelf, or create your own custom classifier. Develop smart applications that analyze the visual content of images or video frames to understand what is happening in a scene.
 
+### Overview of the application
+
+A sample demo of the application with a mailbox analysis is available [here](app0.baudelaine.eu-gb.mybluemix.net).
 
 ### Setup Environment
 
@@ -39,7 +42,7 @@
   1. [GUI environment setup](#gui-environment-setup)
   2. [Windows automatic environment setup](#windows-automatic-environment-setup) - If testing with Windows and don't feel confortable with command line.
   3. [Command line environment setup](#login-to-ibm-cloud)
-
+  
 ### GUI environment setup
 
 Open [instructions](https://github.com/baudelaine/MailboxAnalyzer/blob/master/mailbox.analyzer.gui.environment.setup.pdf)
