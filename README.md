@@ -92,7 +92,7 @@ If everything work you are now ready to [setup the application](setup-applicatio
 
 ### GUI environment setup
 
-Open [instructions](#mailbox.analyzer.gui.environment.setup.pdf)
+Open [instructions](https://github.com/baudelaine/MailboxAnalyzer/blob/master/mailbox.analyzer.gui.environment.setup.pdf)
 
 ### Login to IBM Cloud:
 
