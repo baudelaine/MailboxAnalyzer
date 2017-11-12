@@ -3,15 +3,24 @@
 ## Flow
 ![Flow](mailbox.analyzer.flow.jpg)
 
-### Prerequisites
+### Setup Environment
+
+**3** choices here:
+  1. [GUI environment setup](#gui-environment-setup)
+  2. [Windows automatic environment setup](#windows-automatic-environment-setup) - If testing with Windows and don't feel confortable with command line.
+  3. [Command line environment setup](#login-to-ibm-cloud)
+
+### GUI environment setup
+
+Open [instructions](https://github.com/baudelaine/MailboxAnalyzer/blob/master/mailbox.analyzer.gui.environment.setup.pdf)
+
+### Windows automatic environment setup:
 
 Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
 
-If testing with Windows, download both [curl and jq](wintools.zip) commands and unzip them in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
+Download both [curl and jq](wintools.zip) commands and unzip them in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
-For other platforms download and install [curl](https://curl.haxx.se/download.html) and [jq](https://stedolan.github.io/jq/download/) commands.
-
-Open a Windows command prompt as administrator or a terminal on other platform.
+Open a Windows command prompt as Administrator.
 
 Check cf command is available:
 ```
@@ -36,34 +45,6 @@ Before being able to log to Bluemix with cf command you should be aware of **2**
 If not sure about organization name and if a space is available then log in [IBM Cloud console](https://console.bluemix.net/account/manage-orgs), click 'Cloud Foundry Orgs' then view details, check that 'Cloud Foundry Spaces in Region' is not empty and if so then Add a Cloud Foundry Space.
 
 Now you should know both your organization and your space in one Region and your are ready to connect to Bluemix in command line.
-
-### Setup Environment
-
-**3** choices here:
-  1. If testing with Windows and don't feel confortable with command line choose [Windows automatic environment setup](#windows-automatic-environment-setup)
-  2. [GUI environment setup](#gui-environment-setup)
-  3. [Command line environment setup](#login-to-ibm-cloud)
-  
-### Windows automatic environment setup:
-
-Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
-
-Download both [curl and jq](wintools.zip) commands and unzip them in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
-
-Open a Windows command prompt as administrator or a terminal on other platform.
-
-Check cf command is available:
-```
-cf -v
-```
-Check curl command is available:
-```
-curl -V
-```
-Check jq command is available:
-```
-jq
-```
 
 Browse your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry), edit envmgt.bat and set it accordingly:
 ```
@@ -101,10 +82,6 @@ envmgt.bat /ca
 
 If everything work you are now ready to [setup the application](#setup-application)
 
-### GUI environment setup
-
-Open [instructions](https://github.com/baudelaine/MailboxAnalyzer/blob/master/mailbox.analyzer.gui.environment.setup.pdf)
-
 ### Login to IBM Cloud:
 
 Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
@@ -112,6 +89,32 @@ Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cl
 If testing with Windows, download both [curl and jq](wintools.zip) commands and unzip them in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
 
 For other platforms download and install [curl](https://curl.haxx.se/download.html) and [jq](https://stedolan.github.io/jq/download/) commands.
+
+Open a Windows command prompt as administrator or a terminal on other platform.
+
+Check cf command is available:
+```
+cf -v
+```
+Check curl command is available:
+```
+curl -V
+```
+Check jq command is available:
+```
+jq
+```
+
+**!!! WARNING !!!**
+
+Before being able to log to Bluemix with cf command you should be aware of **2** things:
+  1. the name of your **organization**, which is the same among all Regions (Germany, Sydney, United Kingdom and US South).
+  2. the name of one **space** - which is assigned to one Region only - in one Region (Germany, Sydney, United Kingdom or US South) in your organization.
+
+> At least one organization has been created automatically, but no space is created for you.
+If not sure about organization name and if a space is available then log in [IBM Cloud console](https://console.bluemix.net/account/manage-orgs), click 'Cloud Foundry Orgs' then view details, check that 'Cloud Foundry Spaces in Region' is not empty and if so then Add a Cloud Foundry Space.
+
+Now you should know both your organization and your space in one Region and your are ready to connect to Bluemix in command line.
 
 **!!! WARNING !!!**
 
@@ -191,7 +194,7 @@ cf service-key dsc0 user0
 
 ### Create **coll0** Collection for Discovery service:
 
-Before being able to create a collection 2 steps have to be completed:
+Before being able to create a collection **2** steps have to be completed:
 
    1. Create a environment.
    2. Create a configuration in this environment.
