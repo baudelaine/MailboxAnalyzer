@@ -324,46 +324,8 @@ Check application is running:
 cf a
 ```
 
-## Running the tests
+### Running the Application
 
-Copy urls columns content. It should be **${appName}.eu-gb.mybluemix.net**
+Copy urls columns content. It should be **${unique name/host}.${domain}**
 Paste it in a Web brower and check application is running.
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-
-## Contributing
-
-## Versioning
-
-## Authors
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
