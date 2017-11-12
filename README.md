@@ -1,7 +1,7 @@
 # MailboxAnalyzer
 
 ## Flow
-![Flow](https://github.com/baudelaine/MailboxAnalyzer/blob/master/mailbox.analyzer.flow.jpg)
+![Flow](mailbox.analyzer.flow.jpg)
 
 ### Prerequisites
 
@@ -47,7 +47,7 @@ Now you should know both your organization and your space in one Region and your
 ### Setup Environment
 
 **3** choices here:
-  1. If testing with Windows and don't feel confortable with command line choose [Windows automatic environment setup](Windows-automatic- environment-setup)
+  1. If testing with Windows and don't feel confortable with command line choose [Windows automatic environment setup](Windows-automatic-environment-setup)
   
   
 ### Windows automatic environment setup:
@@ -73,22 +73,19 @@ Display envmgt usage:
 envmgt.bat /h
 ```
 
-> envmgt <command line options>
-Description: This command line tool manage a Cloud Foundry environment.
-Parameter list:
-/lgb                    Login United Kingdom Region
-/lus                    Login US South Region
-/lde                    Login Germany Region
-/lo                     Logout
-/cs                     Create services
-/us <service instance>  Unbind services
-/ds                     Delete services
-/cc                     Create Discovery service collection
-/dc                     Delete Discovery service collection
-/ca                     Create all
-/da                     Delete all
-/h                      Display Usage
-Press any key to continue . . .
+![](envmgt.bat.usage.jpg)
+
+Login a IBM Cloud region:
+
+```
+envmgt.bat /lgb
+```
+
+Create all services and Discovery service Collection:
+
+```
+envmgt.bat /ca
+```
 
 
 ### Login to IBM Cloud:
