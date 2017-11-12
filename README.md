@@ -338,6 +338,10 @@ DSC_COLL_NAME=coll0
 
 ### Deploy the application
 
+**!!! WARNING !!!**
+
+For deployment to work you need to push your code from the same directory as **manifest.yml**.
+
 Now you are ready to deploy the application:
 ```
 cf p
