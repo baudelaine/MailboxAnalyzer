@@ -58,7 +58,7 @@ set org=
 Open a Windows command prompt as Administrator and change to your Cloud Foundry root path:
 
 ```
-cd \Programmes\Cloud Foundry
+cd "\Programmes\Cloud Foundry"
 ```
 
 Display envmgt usage:
