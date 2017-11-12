@@ -47,12 +47,12 @@ Now you should know both your organization and your space in one Region and your
 ### Setup Environment
 
 **3** choices here:
-  1. If testing with Windows and don't feel confortable with command line choose automatic environment setup
+  1. If testing with Windows and don't feel confortable with command line choose [Windows automatic environment setup](Windows-automatic- environment-setup)
   
   
-### Automatic environment setup:
+### Windows automatic environment setup:
 
-Browse your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry)., edit envmgt.bat and set it accordingly:
+Browse your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry), edit envmgt.bat and set it accordingly:
 
 ```
 set userid=
@@ -60,6 +60,36 @@ set password=
 set space=
 set org=
 ```
+
+Open a Windows command prompt as Administrator and change to your Cloud Foundry root path:
+
+```
+cd \Programmes\Cloud Foundry
+```
+
+Display envmgt usage:
+
+```
+envmgt.bat /h
+```
+
+> envmgt <command line options>
+Description: This command line tool manage a Cloud Foundry environment.
+Parameter list:
+/lgb                    Login United Kingdom Region
+/lus                    Login US South Region
+/lde                    Login Germany Region
+/lo                     Logout
+/cs                     Create services
+/us <service instance>  Unbind services
+/ds                     Delete services
+/cc                     Create Discovery service collection
+/dc                     Delete Discovery service collection
+/ca                     Create all
+/da                     Delete all
+/h                      Display Usage
+Press any key to continue . . .
+
 
 ### Login to IBM Cloud:
 
