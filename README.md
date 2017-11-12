@@ -300,7 +300,7 @@ NLU_VERSION=/v1/analyze?version=2017-02-27
 TA_NAME=tone_analyzer
 TA_VERSION=/v3/tone?version=2016-05-19
 DSC_NAME=discovery
-DSC_VERSION=/v1/environments?version=2017-09-01
+DSC_VERSION=/v1/environments?version=2017-11-07
 DSC_ENV_NAME=${environment_name}
 DSC_COLL_NAME=${collection_name}
 WVC_NAME=watson_vision_combined
