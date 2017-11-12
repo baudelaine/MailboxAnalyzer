@@ -326,22 +326,14 @@ If you changed Discovery Environment name and/or Discovery Collection name then 
 
 **!!! WARNING !!!**
 
-If you choosed GUI environment setup option your Discovery service enrironment name has been set to **byod** then edit **WebContent/res/conf.properties** and substitue **${environment_name}** with **byod**.
+If you choosed GUI environment setup option, your Discovery service enrironment name has been set to **byod**. So edit **WebContent/res/conf.properties** and substitue **env0** with **byod**.
 
-Otherwise jump to [Deploy Section](#deploy-the-application).
+Otherwise leave WebContent/res/conf.properties unchanged and jump to [Deploy Section](#deploy-the-application).
 ```
-VCAP_SERVICES=
-CLEAN_DCOLL_AT_STARTUP=true
-NLU_NAME=natural-language-understanding
-NLU_VERSION=/v1/analyze?version=2017-02-27
-TA_NAME=tone_analyzer
-TA_VERSION=/v3/tone?version=2016-05-19
-DSC_NAME=discovery
-DSC_VERSION=/v1/environments?version=2017-11-07
-DSC_ENV_NAME=${environment_name}
-DSC_COLL_NAME=${collection_name}
-WVC_NAME=watson_vision_combined
-WVC_VERSION=/v3/classify?version=2016-05-20
+...
+DSC_ENV_NAME=env0
+DSC_COLL_NAME=coll0
+...
 ```
 
 ### Deploy the application
