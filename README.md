@@ -3,10 +3,20 @@
 ## Flow
 ![Flow](mailbox.analyzer.flow.jpg)
 
-### About IBM Cloud Watson services used in the application
+### About IBM Cloud Watson services being used in the application
 ![](ta50x.png)
+> Tone Analyzer uses linguistic analysis to detect three types of tones from communications: emotion, social, and language.  This insight can then be used to drive high impact communications.
+
+[Documentation](https://console.bluemix.net/docs/services/tone-analyzer/getting-started.html)
+
+[Dashboard](https://www.ibm.com/watson/developercloud/dashboard/en/tone-analyzer-dashboard.html)
 
 ![](nlu50x.png)
+> Analyze text to extract meta-data from content such as concepts, entities, emotion, relations, sentiment and more.
+
+[Documentation](https://console.bluemix.net/docs/services/natural-language-understanding/getting-started.html)
+
+[Dashboard](https://www.ibm.com/watson/developercloud/dashboard/en/natural-language-understanding-dashboard.html)
 
 ![](dsc50x.png)
 
