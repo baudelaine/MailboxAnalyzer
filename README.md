@@ -46,7 +46,7 @@ Open [instructions](https://github.com/baudelaine/MailboxAnalyzer/blob/master/ma
 
 If everything worked you are now ready to [setup the application](#setup-application)
 
-### Windows automatic environment setup:
+### Windows automatic environment setup
 
 Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
 
@@ -114,7 +114,7 @@ envmgt.bat /ca
 
 If everything work you are now ready to [setup the application](#setup-application)
 
-### Login to IBM Cloud:
+### Login to IBM Cloud
 
 Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
 
@@ -164,7 +164,7 @@ or connect to IBM Cloud United Kingdom Region:
 cf l -a https://api.eu-gb.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}
 ```
 
-### Create Tone Analyzer service:
+### Create Tone Analyzer service
 > Syntax: cf cs ${service} ${plan} ${service_instance}
 ```
 cf cs tone_analyzer standard ta0
@@ -182,7 +182,7 @@ Check that service key has been created:
 cf sk ta0
 ```
 
-### Create Natural Language Understanding service:
+### Create Natural Language Understanding service
 > Syntax: cf cs ${service} ${plan} ${service_instance}
 ```
 cf cs natural-language-understanding free nlu0
@@ -200,7 +200,7 @@ Check that service key has been created:
 cf sk nlu0
 ```
 
-### Create Discovery service:
+### Create Discovery service
 > Syntax: cf cs ${service} ${plan} ${service_instance}
 ```
 cf cs discovery lite dsc0
@@ -224,7 +224,7 @@ At any time you should be able to get your credential (url, port, username, pass
 cf service-key dsc0 user0
 ```
 
-### Create **coll0** Collection for Discovery service:
+### Create **coll0** Collection for Discovery service
 
 Before being able to create a collection **2** steps have to be completed:
 
@@ -240,12 +240,12 @@ Create **env0** environment for Discovery service:
 curl -X POST -u ${username}:${password} -H "Content-Type: application/json" -d "{\"name\": \"env0\"}" "${url}/v1/environments?version=${version}"
 ```
 
-Get **environment_id** for Discovery service:
+Get **environment_id** for Discovery service
 ```
 curl -u ${username}:${password} "${url}/v1/environments?version=${version}" | jq -r --arg ENV env0 ".environments[] | select(.name == $ENV) | .environment_id"
 ```
 
-Create **configuration** for Discovery service with **environment_id** from above:
+Create **configuration** for Discovery service with **environment_id** from above
 ```
 curl -u ${username}:${password} ${url}/v1/environments/${environment_id}/configurations?version=${version}
 ```
@@ -257,31 +257,31 @@ curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/config
 
 Now, you should be ready to create the collection.
 
-Create collection **coll0** for Discovery service:
+Create collection **coll0** for Discovery service
 ```
 curl -X POST -H "Content-Type: application/json" -u ${username}:${password} -d "{\"name\": \"coll0\", \"configuration_id\":\"${configuration_id}\" , \"language\": \"en_us\"}" ${url}/v1/environments/${environment_id}/collections?version=${version}
 ```
 
-Get collection_id for Discovery service:
+Get collection_id for Discovery service
 ```
 curl -u ${username}:${password} "${url}/v1/environments/${environment_id}/collections?version=${version}" | jq -r ".collections[] | .collection_id"
 ```
 
 > You won't need your configuration_id nor environment_id, neither  configuration_id for further use but keep **env0** and **coll0** in mind.
 
-### Create Visual Recognition service:
+### Create Visual Recognition service
 > Syntax: cf cs ${service} ${plan} ${service_instance}
 ```
 cf cs watson_vision_combined free wvc0
 ```
 
-Create service key (credential) to grant access to service:
+Create service key (credential) to grant access to service
 > Syntax: cf csk ${service_instance} ${service_key}
 ```
 cf csk wvc0 user0
 ```
 
-Check that service key has been created:
+Check that service key has been created
 > Syntax: cf sk ${service_instance}
 ```
 cf sk wvc0
@@ -355,6 +355,6 @@ cf a
 
 ### Running the Application
 
-Copy urls columns content. It should be **${unique name/host}.${domain}**
+Copy urls columns content. It should be **${unique name/host}.${domain}**.
 Paste it in a Web brower and check application is running.
 
