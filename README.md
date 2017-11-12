@@ -267,7 +267,7 @@ cf s
 
 If not already done, download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
 
-Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip) unzip and change to this newly created directory (e.g.: MailboxAnalyzer-master).
+Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip) unzip and change to this newly created directory (e.g.: MailboxAnalyzer-master/MailboxAnalyzer-master).
 
 > Now if you stand in the correct directory, you should be able to list directory such as **WebContent** and file such as **manifest.yml**.
 
