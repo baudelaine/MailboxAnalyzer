@@ -1,9 +1,9 @@
 applications:
-- host: ${appName}
+- host: app1
   disk: 256M
-  name: ${appName}
+  name: app1
   path: ./WebContent
-  domain: eu-gb.mybluemix.net
+  domain: baudelaine.eu-gb.mybluemix.net
   mem: 256M
   instances: 1
   services:
