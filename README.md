@@ -233,7 +233,7 @@ Before being able to create a collection **2** steps have to be completed:
 
 **!!! WARNING !!!**
 
-Latest version of Dsicovery service is 2017-11-07. So subsitute all followings **${version}** with **2017-11-07**.
+Latest version of Discovery service is 2017-11-07. So subsitute all followings **${version}** with **2017-11-07**.
 
 Create **env0** environment for Discovery service:
 ```
