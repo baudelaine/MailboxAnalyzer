@@ -28,13 +28,6 @@ jq
 
 **!!! WARNING !!!**
 
-Every further variables - including ${} - like ${something} have to be substituted with your own environment variables:
-
-* e.g.
-  * ${userid} will become yourUserid
-
-**!!! WARNING !!!**
-
 Before being able to log to Bluemix with cf command you should be aware of **2** things:
   1. the name of your **organization**, which is the same among all Regions (Germany, Sydney, United Kingdom and US South).
   2. the name of one **space** - which is assigned to one Region only - in one Region (Germany, Sydney, United Kingdom or US South) in your organization.
@@ -44,12 +37,19 @@ If not sure about organization name and if a space is available then log in [Blu
 
 Now you should know both your organization and your space in one Region and your are ready to connect to Bluemix in command line.
 
+**!!! WARNING !!!**
+
+Every further variables - including ${} - like ${something} have to be substituted with your own environment variables:
+
+* e.g.
+  * ${userid} will become yourUserid
+
 ### Setup Environment
 
 **3** choices here:
-  1. If testing with Windows and don't feel confortable with command line choose [Windows automatic environment setup](windows-automatic-environment-setup)
-  2. [GUI environment setup](gui-environment-setup)
-  3. [Command line environment setup](login-to-ibm-cloud)
+  1. If testing with Windows and don't feel confortable with command line choose [Windows automatic environment setup](#windows-automatic-environment-setup)
+  2. [GUI environment setup](#gui-environment-setup)
+  3. [Command line environment setup](#login-to-ibm-cloud)
   
 ### Windows automatic environment setup:
 
