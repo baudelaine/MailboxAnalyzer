@@ -47,8 +47,9 @@ Now you should know both your organization and your space in one Region and your
 ### Setup Environment
 
 **3** choices here:
-  1. If testing with Windows and don't feel confortable with command line choose [Windows automatic environment setup](Windows-automatic-environment-setup)
-  
+  1. If testing with Windows and don't feel confortable with command line choose [Windows automatic environment setup](windows-automatic-environment-setup)
+  2. [GUI environment setup](gui-environment-setup)
+  3. [Command line environment setup](login-to-ibm-cloud)
   
 ### Windows automatic environment setup:
 
@@ -87,6 +88,11 @@ Create all services and Discovery service Collection:
 envmgt.bat /ca
 ```
 
+If everything work you are now ready to [setup the application](setup-application)
+
+### GUI environment setup
+
+Open [instructions]()
 
 ### Login to IBM Cloud:
 
@@ -224,7 +230,7 @@ Check it with:
 cf s
 ```
 
-### Setup applications
+### Setup application
 
 Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip) unzip and change to this newly created directory (e.g.: MailboxAnalyzer-master).
 
