@@ -359,6 +359,6 @@ cf a
 
 ### Running the Application
 
-Copy urls columns content. It should be **${unique name/host}.${domain}**.
+Copy urls columns content. It should be **${unique name/host}.${domain}** (e.g.:myapp.eu-gb.mybluemix.net).
 Paste it in a Web brower and check application is running.
 
