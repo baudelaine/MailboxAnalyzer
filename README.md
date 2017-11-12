@@ -14,7 +14,7 @@
 
 Open [instructions](https://github.com/baudelaine/MailboxAnalyzer/blob/master/mailbox.analyzer.gui.environment.setup.pdf)
 
-If everything work you are now ready to [setup the application](#setup-application)
+If everything worked you are now ready to [setup the application](#setup-application)
 
 ### Windows automatic environment setup:
 
