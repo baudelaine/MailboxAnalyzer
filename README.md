@@ -8,21 +8,18 @@
 > **Tone Analyzer** uses linguistic analysis to detect three types of tones from communications: emotion, social, and language.  This insight can then be used to drive high impact communications.
 
 [Documentation](https://console.bluemix.net/docs/services/tone-analyzer/getting-started.html)
-
 [Dashboard](https://www.ibm.com/watson/developercloud/dashboard/en/tone-analyzer-dashboard.html)
 
 ![](nlu50x.png)
 > **Natural Language Understanding** analyze text to extract meta-data from content such as concepts, entities, emotion, relations, sentiment and more.
 
 [Documentation](https://console.bluemix.net/docs/services/natural-language-understanding/getting-started.html)
-
 [Dashboard](https://www.ibm.com/watson/developercloud/dashboard/en/natural-language-understanding-dashboard.html)
 
 ![](dsc50x.png)
 > **Discovery** add a cognitive search and content analytics engine to applications.
 
 [Documentation](https://console.bluemix.net/docs/services/discovery/getting-started.html)
-
 [Dashboard](https://www.ibm.com/watson/developercloud/dashboard/en/discovery-dashboard.html)
 
 ![](wvc50x.png)
