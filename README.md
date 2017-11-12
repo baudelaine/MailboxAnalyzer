@@ -33,16 +33,9 @@ Before being able to log to Bluemix with cf command you should be aware of **2**
   2. the name of one **space** - which is assigned to one Region only - in one Region (Germany, Sydney, United Kingdom or US South) in your organization.
 
 > At least one organization has been created automatically, but no space is created for you.
-If not sure about organization name and if a space is available then log in [Bluemix console](https://console.bluemix.net/account/manage-orgs), click 'Cloud Foundry Orgs' then view details, check that 'Cloud Foundry Spaces in Region' is not empty and if so then Add a Cloud Foundry Space.
+If not sure about organization name and if a space is available then log in [IBM Cloud console](https://console.bluemix.net/account/manage-orgs), click 'Cloud Foundry Orgs' then view details, check that 'Cloud Foundry Spaces in Region' is not empty and if so then Add a Cloud Foundry Space.
 
 Now you should know both your organization and your space in one Region and your are ready to connect to Bluemix in command line.
-
-**!!! WARNING !!!**
-
-Every further variables - including ${} - like ${something} have to be substituted with your own environment variables:
-
-* e.g.
-  * ${userid} will become yourUserid
 
 ### Setup Environment
 
@@ -88,13 +81,20 @@ Create all services and Discovery service Collection:
 envmgt.bat /ca
 ```
 
-If everything work you are now ready to [setup the application](setup-application)
+If everything work you are now ready to [setup the application](#setup-application)
 
 ### GUI environment setup
 
 Open [instructions](https://github.com/baudelaine/MailboxAnalyzer/blob/master/mailbox.analyzer.gui.environment.setup.pdf)
 
 ### Login to IBM Cloud:
+
+**!!! WARNING !!!**
+
+Every further variables - including ${} - like ${something} have to be substituted with your own environment variables:
+
+* e.g.
+  * ${userid} will become yourUserid
 
 Connect to IBM Cloud US South Region:
 ```
