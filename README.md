@@ -46,8 +46,26 @@ Now you should know both your organization and your space in one Region and your
   
 ### Windows automatic environment setup:
 
-Browse your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry), edit envmgt.bat and set it accordingly:
+Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
 
+Download both [curl and jq](wintools.zip) commands and unzip them in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
+
+Open a Windows command prompt as administrator or a terminal on other platform.
+
+Check cf command is available:
+```
+cf -v
+```
+Check curl command is available:
+```
+curl -V
+```
+Check jq command is available:
+```
+jq
+```
+
+Browse your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry), edit envmgt.bat and set it accordingly:
 ```
 set userid=
 set password=
@@ -88,6 +106,12 @@ If everything work you are now ready to [setup the application](#setup-applicati
 Open [instructions](https://github.com/baudelaine/MailboxAnalyzer/blob/master/mailbox.analyzer.gui.environment.setup.pdf)
 
 ### Login to IBM Cloud:
+
+Download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
+
+If testing with Windows, download both [curl and jq](wintools.zip) commands and unzip them in your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry).
+
+For other platforms download and install [curl](https://curl.haxx.se/download.html) and [jq](https://stedolan.github.io/jq/download/) commands.
 
 **!!! WARNING !!!**
 
@@ -231,6 +255,8 @@ cf s
 ```
 
 ### Setup application
+
+If not already done, download and install the [cf](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html) command from Cloud Foundry.
 
 Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip) unzip and change to this newly created directory (e.g.: MailboxAnalyzer-master).
 
