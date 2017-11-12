@@ -200,6 +200,7 @@ Before being able to create a collection **2** steps have to be completed:
    2. Create a configuration in this environment.
 
 **!!! WARNING !!!**
+
 Latest version of Dicovery service is 2017-11-07. So subsitute all followings **${version}** with **2017-11-07**.
 
 Create **env0** environment for Discovery service:
