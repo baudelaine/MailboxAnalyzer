@@ -46,7 +46,13 @@ Now you should know both your organization and your space in one Region and your
 
 ### Setup Environment
 
-If testing with Windows and don't feel confortable with command line download [envmgt.bat](https://github.com/baudelaine/MailboxAnalyzer/blob/master/envmgt.bat), edit and set accordingly:
+**3** choices here:
+  1. If testing with Windows and don't feel confortable with command line choose automatic environment setup
+  
+  
+### Automatic environment setup:
+
+Browse your Cloud Foundry root path (e.g: C:\Programmes\Cloud Foundry)., edit envmgt.bat and set it accordingly:
 
 ```
 set userid=
@@ -55,11 +61,13 @@ set space=
 set org=
 ```
 
-Connect to Bluemix US South Region:
+### Login to IBM Cloud:
+
+Connect to IBM Cloud US South Region:
 ```
 cf l -a https://api.ng.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}
 ```
-or connect to Bluemix United Kingdom Region:
+or connect to IBM Cloud United Kingdom Region:
 ```
 cf l -a https://api.eu-gb.bluemix.net -u ${userid} -p ${password} --skip-ssl-validation -s ${space} -o ${organization}
 ```
