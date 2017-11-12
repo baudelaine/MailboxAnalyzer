@@ -326,7 +326,7 @@ If you changed Discovery Environment name and/or Discovery Collection name then 
 
 **!!! WARNING !!!**
 
-If you GUI environment setup option you Discovery service enrironment name has been set to **byod** then edit **WebContent/res/conf.properties** and substitue **${environment_name}** with **byod**.
+If you choosed GUI environment setup option your Discovery service enrironment name has been set to **byod** then edit **WebContent/res/conf.properties** and substitue **${environment_name}** with **byod**.
 
 Otherwise jump to [Deploy Section](#deploy-the-application).
 ```
