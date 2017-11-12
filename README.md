@@ -6,6 +6,12 @@
 ### About IBM Cloud Watson services used in the application
 ![](ta50x.png)
 
+![](nlu50x.png)
+
+![](dsc50x.png)
+
+![](wvc50x.png)
+
 ### Setup Environment
 
 **3** choices here:
