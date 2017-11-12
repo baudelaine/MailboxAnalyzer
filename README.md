@@ -227,7 +227,7 @@ Now, you should be ready to create the collection.
 
 Create collection **coll0** for Discovery service:
 ```
-curl -X POST -H "Content-Type: application/json" -u ${username}:${password} -d "{\"name\": \"coll0\", \"configuration_id\":\"${configuration_id}\" , \"language\": \"en_us\"}' ${url}/v1/environments/${environment_id}/collections?version=${version}
+curl -X POST -H "Content-Type: application/json" -u ${username}:${password} -d "{\"name\": \"coll0\", \"configuration_id\":\"${configuration_id}\" , \"language\": \"en_us\"}" ${url}/v1/environments/${environment_id}/collections?version=${version}
 ```
 
 Get collection_id for Discovery service:
