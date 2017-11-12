@@ -2,10 +2,13 @@
 setlocal ENABLEEXTENSIONS
 set ME=%~n0
 set PARENT=%~dp0
-set userid=
-set password=
-set space=
-set org=
+:: Start custom settings. 
+:: In most usecases, only the 4 settings below need to be changed:
+set userid=sebastien.gautier@fr.ibm.com
+set password=j1mm4p6p
+set space=devuk
+set org=sebastien.gautier@fr.ibm.com
+:: End custom settings
 set svcKeyName=user0
 set appName=app0
 set svc[0]=tone_analyzer standard ta0
@@ -31,6 +34,13 @@ if %ARG:~1,4%==lus call :loginUS
 if %ARG:~1,4%==lde call :loginDE
 if %ARG:~1,3%==lo call :logout
 if %ARG:~1,3%==cs call :createService
+if %ARG:~1,3%==us (
+	if -%2-==-- (
+		goto :displayUsage
+	) else (
+		call :unbindService %2
+	)
+)
 if %ARG:~1,3%==ds call :removeService
 if %ARG:~1,3%==cc call :createDiscoveryCollection
 if %ARG:~1,3%==dc call :removeDiscoveryCollection
@@ -42,6 +52,7 @@ if %ARG:~1,3%==da (
 	call :removeDiscoveryCollection
 	call :removeService
 )
+if %ARG:~1,2%==h goto :displayUsage
 
 :epilogue
 pause
@@ -56,19 +67,20 @@ exit /b
 	@echo:
 	@echo Parameter list:
 	@echo:
-	@echo /lgb					Login United Kingdom Region
-	@echo /lus					Login US South Region  
-	@echo /lde					Login Germany Region
-	@echo /lo					Logout
-	@echo /cs					Create services
-	@echo /ds					Delete services
-	@echo /cc					Create Discovery service collection
-	@echo /dc					Delete Discovery service collection
+	@echo /lgb			Login United Kingdom Region
+	@echo /lus			Login US South Region  
+	@echo /lde			Login Germany Region
+	@echo /lo			Logout
+	@echo /cs			Create services
+	@echo /us ^<service instance^>	Unbind services
+	@echo /ds			Delete services
+	@echo /cc			Create Discovery service collection
+	@echo /dc			Delete Discovery service collection
 	@echo:
-	@echo /ca					Create all
-	@echo /da					Delete all
+	@echo /ca			Create all
+	@echo /da			Delete all
 	@echo:
-	@echo /h					Display Usage
+	@echo /h			Display Usage
 	@echo:  
 	goto :epilogue
 :endDisplayUsage
@@ -119,6 +131,23 @@ exit /b
 :endCreateService
 exit /b
 
+:unbindService
+setlocal ENABLEDELAYEDEXPANSION
+
+	set SVC=%~1
+	@echo %SVC%
+
+	for /f "tokens=1,2 delims=:" %%a in ('cf service %SVC% ^| findstr /i "bound apps"') do set APP=%%b
+
+	set APP=%APP:~1%
+
+	if not -%APP%-==-- (
+		cf us %APP% %SVC%
+	)
+
+:endUnbindService
+exit /b
+
 :removeService
 setlocal ENABLEDELAYEDEXPANSION
 
@@ -133,8 +162,7 @@ setlocal ENABLEDELAYEDEXPANSION
 	for /l %%i in (0,1,%svcCount%) do (
 		set SVC=!svc[%%i]!
 		for /f "tokens=1,2,3" %%a in ('echo !SVC!') do (
-			set CMD="cf us %appName% %%c"
-			call :executeCmd !CMD!
+			call :unbindService %%c
 			set CMD="cf dsk %%c %svcKeyName% -f"
 			call :executeCmd !CMD!
 			if %errorlevel% equ 0 (
