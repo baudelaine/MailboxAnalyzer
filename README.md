@@ -37,7 +37,7 @@ jq
 
 **!!! WARNING !!!**
 
-Before being able to log to Bluemix with cf command you should be aware of **2** things:
+Before being able to log to IBM Cloud with cf command you should be aware of **2** things:
   1. the name of your **organization**, which is the same among all Regions (Germany, Sydney, United Kingdom and US South).
   2. the name of one **space** - which is assigned to one Region only - in one Region (Germany, Sydney, United Kingdom or US South) in your organization.
 
@@ -107,7 +107,7 @@ jq
 
 **!!! WARNING !!!**
 
-Before being able to log to Bluemix with cf command you should be aware of **2** things:
+Before being able to log to IBM Cloud with cf command you should be aware of **2** things:
   1. the name of your **organization**, which is the same among all Regions (Germany, Sydney, United Kingdom and US South).
   2. the name of one **space** - which is assigned to one Region only - in one Region (Germany, Sydney, United Kingdom or US South) in your organization.
 
