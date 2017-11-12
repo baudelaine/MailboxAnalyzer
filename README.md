@@ -273,7 +273,7 @@ Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip
 
 Before deploying the application you need to choose **2** things:
   1. A **unique name/host** (in a region or domain) for your application
-  2. A **domain** among those availbale (e.g.: **eu-gb.mybluemix.net** or **mybluemix.net**)
+  2. A **domain** among those available (e.g.: **eu-gb.mybluemix.net** or **mybluemix.net**)
   
 Edit the manifest.yml and update it accordingly by substituting both **${unique name/host}** and **${domain}**:
 ```
