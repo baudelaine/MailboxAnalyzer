@@ -365,3 +365,6 @@ cf a
 Copy urls columns content. It should be **${unique name/host}.${domain}** (e.g.:myapp.eu-gb.mybluemix.net).
 Paste it in a Web brower and check application is running.
 
+### Todo List
+
+The application is not finished yet. To look at attached files and pictures, open a new browser tab and append /res/mails/${filename} to application url (e.g.: http://app0.baudelaine.eu-gb.mybluemix.net/res/mails/bar.jpg).
