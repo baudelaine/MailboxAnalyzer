@@ -358,7 +358,7 @@ Now you are ready to deploy the application:
 cf p
 ```
 
-Once staging has completed you should be able to run *your application on IBM Cloud*.
+Once staging has completed you should be able to run the application *on your on IBM Cloud environment*.
 
 ### Running the Application
 
