@@ -358,17 +358,9 @@ Now you are ready to deploy the application:
 cf p
 ```
 
-Once staging has completed check that all services are bound:
-```
-cf s
-```
-
-Check application is running:
-```
-cf a
-```
+Once staging has completed you should be able to [run you application on IBM Cloud](#running-the-application) 
 
 ### Running the Application
 
-Copy urls columns content. It should be **${host}.${domain}** (e.g.:myapp.eu-gb.mybluemix.net).
+Copy urls columns content. It should be **${host}.${domain}** (e.g.:**mylastname-mycompagny.eu-gb.mybluemix.net**).
 Paste it in a Web brower and check application is running.
