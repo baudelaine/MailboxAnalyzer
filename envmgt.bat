@@ -10,13 +10,12 @@ set space=
 set org=
 :: End custom settings
 set svcKeyName=user0
-set appName=app0
 set svc[0]=tone_analyzer standard ta0
 set svc[1]=natural-language-understanding free nlu0
 set svc[2]=discovery lite dsc0
 set svc[3]=watson_vision_combined free wvc0
 set dscName=dsc0
-set dscEnv=env0
+set dscEnv=byod
 set dscColl=coll0
 set dscLang=en_us
 set dscVer=2017-11-07
@@ -52,6 +51,8 @@ if %ARG:~1,3%==da (
 	call :removeDiscoveryCollection
 	call :removeService
 )
+if %ARG:~1,2%==t call :test
+
 if %ARG:~1,2%==h goto :displayUsage
 
 :epilogue
@@ -88,16 +89,19 @@ exit /b
 
 :loginGB
 	cf l -a https://api.eu-gb.bluemix.net -u %userid% -p %password% --skip-ssl-validation -s %space% -o %org%
+::	cf l -a https://api.eu-gb.bluemix.net -u %userid% --skip-ssl-validation -s %space% -o %org%
 :endLoginGB
 exit /b
 
 :loginDE
 	cf l -a https://api.eu-de.bluemix.net -u %userid% -p %password% --skip-ssl-validation -s %space% -o %org%
+::	cf l -a https://api.eu-de.bluemix.net -u %userid% --skip-ssl-validation -s %space% -o %org%
 :endLoginDE
 exit /b
 
 :loginUS
 	cf l -a https://api.ng.bluemix.net -u %userid% -p %password% --skip-ssl-validation -s %space% -o %org%
+::	cf l -a https://api.ng.bluemix.net -u %userid% --skip-ssl-validation -s %space% -o %org%
 :endLoginUS
 exit /b
 
@@ -135,14 +139,16 @@ exit /b
 setlocal ENABLEDELAYEDEXPANSION
 
 	set SVC=%~1
-	@echo %SVC%
+	
+	if "%SVC%"=="~1" goto :endUnbindService
 
-	for /f "tokens=1,2 delims=:" %%a in ('cf service %SVC% ^| findstr /i "bound apps"') do set APP=%%b
+	for /f "tokens=1,2 delims=:" %%a in ('cf service %SVC% ^| findstr /i "bound apps"') do set APPS=%%b
 
-	set APP=%APP:~1%
-
-	if not -%APP%-==-- (
-		cf us %APP% %SVC%
+	set APPS=%APPS:~1%
+	
+	for %%a in (%APPS%) do (
+		set APP=%%a
+		cf us !APP! %SVC%
 	)
 
 :endUnbindService
@@ -162,15 +168,24 @@ setlocal ENABLEDELAYEDEXPANSION
 	for /l %%i in (0,1,%svcCount%) do (
 		set SVC=!svc[%%i]!
 		for /f "tokens=1,2,3" %%a in ('echo !SVC!') do (
-			call :unbindService %%c
-			set CMD="cf dsk %%c %svcKeyName% -f"
-			call :executeCmd !CMD!
-			if %errorlevel% equ 0 (
-				set CMD="cf ds %%c -f"
+			set INST=%%c
+			
+			for /f "tokens=*" %%r in ('cf service !INST! ^| findstr "not found"') do set RESP=%%r
+			
+			if not -!RESP!-==-- ( 
+				@echo !INST! does not exists.
+			) else (
+				call :unbindService !INST!
+				set CMD="cf dsk !INST! %svcKeyName% -f"
 				call :executeCmd !CMD!
+				if %errorlevel% equ 0 (
+					set CMD="cf ds !INST! -f"
+					call :executeCmd !CMD!
+				)
 			)
 		)
 	)
+	
 :endRemoveService
 exit /b
 
@@ -181,6 +196,12 @@ exit /b
 		set LINE=%%a
 		set credential=!credential!!LINE!
 	)
+	
+	if "-%credential%-"=="--" (
+		@echo WARNING: No Discovery credential found.
+		goto :endRemoveDiscoveryCollection
+	)
+	
 	for /f "delims=" %%a in ('cmd /c "echo %credential% | jq -r .password"') do set PASSWORD=%%a
 	for /f "delims=" %%a in ('cmd /c "echo %credential% | jq -r .username"') do set USERNAME=%%a
 	for /f "delims=" %%a in ('cmd /c "echo %credential% | jq -r .url"') do set URL=%%a
@@ -191,7 +212,7 @@ exit /b
 
 	curl -X POST -u %USERNAME%:%PASSWORD% -H "Content-Type: application/json" -d "{\"name\": \"%dscEnv%\"}" "%URL%/v1/environments?version=%dscVer%"
 
-	for /f "tokens=*" %%a in ('curl -u %USERNAME%:%PASSWORD% "%URL%/v1/environments?version=%dscVer%" ^| jq -r --arg ENV env0 ".environments[] | select(.name == $ENV) | .environment_id"') do set ENVID=%%a
+	for /f "tokens=*" %%a in ('curl -u %USERNAME%:%PASSWORD% "%URL%/v1/environments?version=%dscVer%" ^| jq -r --arg ENV %dscEnv% ".environments[] | select(.name == $ENV) | .environment_id"') do set ENVID=%%a
 	@echo %ENVID%
 
 	curl -u %USERNAME%:%PASSWORD% %URL%/v1/environments/%ENVID%/configurations?version=%dscVer%
@@ -213,6 +234,12 @@ exit /b
 		set LINE=%%a
 		set credential=!credential!!LINE!
 	)
+	
+	if "-%credential%-"=="--" (
+		@echo WARNING: No Discovery credential found.
+		goto :endRemoveDiscoveryCollection
+	)
+	
 	for /f "delims=" %%a in ('cmd /c "echo %credential% | jq -r .password"') do set PASSWORD=%%a
 	for /f "delims=" %%a in ('cmd /c "echo %credential% | jq -r .username"') do set USERNAME=%%a
 	for /f "delims=" %%a in ('cmd /c "echo %credential% | jq -r .url"') do set URL=%%a
@@ -221,7 +248,7 @@ exit /b
 	@echo %USERNAME%
 	@echo %URL%
 
-	for /f "tokens=*" %%a in ('curl -u %USERNAME%:%PASSWORD% "%URL%/v1/environments?version=%dscVer%" ^| jq -r --arg ENV env0 ".environments[] | select(.name == $ENV) | .environment_id"') do set ENVID=%%a
+	for /f "tokens=*" %%a in ('curl -u %USERNAME%:%PASSWORD% "%URL%/v1/environments?version=%dscVer%" ^| jq -r --arg ENV %dscEnv% ".environments[] | select(.name == $ENV) | .environment_id"') do set ENVID=%%a
 	@echo %ENVID%
 
 	for /f "tokens=*" %%a in ('curl -u %USERNAME%:%PASSWORD% "%URL%/v1/environments/%ENVID%/collections?version=%dscVer%" ^| jq -r ".collections[] | .collection_id"') do set COLLID=%%a
@@ -242,4 +269,20 @@ exit /b
 	%CMD%
 	@echo rc=%errorlevel%
 :endExecuteCmd
+exit /b
+
+:test
+
+::set VAR=app0,app1,app2,app3
+set VAR=
+
+set count=1
+
+for %%a in (%VAR%) do (
+	@echo %%a
+	@echo !count!
+	set /a count+=1
+)
+
+:endTest
 exit /b
