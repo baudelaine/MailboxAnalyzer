@@ -310,6 +310,7 @@ Before deploying the application you need to choose **3** things:
   3. A **domain** among those available (e.g.: **eu-gb.mybluemix.net** or **mybluemix.net**)
 
 > It's optional but you may find usefull to create a sudomain under an IBM Cloud domain (e.g.: mycompagny.eu-gb.mybluemix.net) to group all your apps.
+
 > Syntax: cf create-domain ${org} ${domain}
 ```
 cf create-domain myorg mycompany.eu-gb.mybluemix.net
