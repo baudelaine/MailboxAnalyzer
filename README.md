@@ -34,7 +34,7 @@
 
 ### Overview of the application
 
-A sample demo of the application with a mailbox analysis is available [here](http://app0.baudelaine.eu-gb.mybluemix.net).
+A sample demo of the application with a mailbox analysis *may be* available [here](http://app0.baudelaine.eu-gb.mybluemix.net).
 
 ### Setup Environment
 
