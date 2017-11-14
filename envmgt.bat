@@ -4,10 +4,10 @@ set ME=%~n0
 set PARENT=%~dp0
 :: Start custom settings. 
 :: In most usecases, only the 4 settings below need to be changed:
-set userid=sebastien.gautier@fr.ibm.com
-set password=j1mm4p6p
-set space=devuk
-set org=sebastien.gautier@fr.ibm.com
+set userid=
+set password=
+set space=
+set org=
 :: End custom settings
 set svcKeyName=user0
 set appName=app0
