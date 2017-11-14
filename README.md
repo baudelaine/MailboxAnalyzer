@@ -304,16 +304,17 @@ Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip
 
 > Now if you stand in the correct directory, you should be able to list directory such as **WebContent** and file such as **manifest.yml**.
 
-Before deploying the application you need to choose **2** things:
-  1. A **unique name/host** (in a region or domain) for your application
-  2. A **domain** among those available (e.g.: **eu-gb.mybluemix.net** or **mybluemix.net**)
+Before deploying the application you need to choose **3** things:
+  1. A **host** (must be unique in a region or domain) for your application (e.g.: **mylastname-mycompagny**)
+  2. A **name** (must be unique in your space) for your application (e.g.: **myapp0**)
+  3. A **domain** among those available (e.g.: **eu-gb.mybluemix.net** or **mybluemix.net**)
   
-Edit the manifest.yml and update it accordingly by substituting both **${unique name/host}** and **${domain}**:
+Edit the manifest.yml and update it accordingly by substituting both **${host}**, **${name}** and **${domain}**:
 ```
 applications:
-- host: ${unique name/host}
+- host: ${host}
   disk: 256M
-  name: ${unique name/host}
+  name: ${name}
   path: ./WebContent
   domain: ${domain}
   mem: 256M
