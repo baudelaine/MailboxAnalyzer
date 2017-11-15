@@ -34,7 +34,7 @@
 
 ### Overview of the application
 
-A sample demo of the application with a mailbox analysis is available [here](http://app0.baudelaine.eu-gb.mybluemix.net).
+A sample demo of the application with a mailbox analysis *may be* available [here](http://mailboxanalyzer.baudelaine.eu-gb.mybluemix.net).
 
 ### Setup Environment
 
@@ -304,16 +304,24 @@ Download [code](https://github.com/baudelaine/MailboxAnalyzer/archive/master.zip
 
 > Now if you stand in the correct directory, you should be able to list directory such as **WebContent** and file such as **manifest.yml**.
 
-Before deploying the application you need to choose **2** things:
-  1. A **unique name/host** (in a region or domain) for your application
-  2. A **domain** among those available (e.g.: **eu-gb.mybluemix.net** or **mybluemix.net**)
-  
-Edit the manifest.yml and update it accordingly by substituting both **${unique name/host}** and **${domain}**:
+Before deploying the application you need to choose **3** things:
+  1. A **host** (must be unique in a region or domain) for your application (e.g.: **mylastname-mycompagny**)
+  2. A **name** (must be unique in your space) for your application (e.g.: **myapp0**)
+  3. A **domain** among those available (e.g.: **eu-gb.mybluemix.net** or **mybluemix.net**)
+
+> It's optional but you may find usefull to create a sudomain under an IBM Cloud domain (e.g.: mycompagny.eu-gb.mybluemix.net) to group all your apps.
+
+> Syntax: cf create-domain ${org} ${domain}
+```
+cf create-domain myorg mycompany.eu-gb.mybluemix.net
+```
+
+Edit the manifest.yml and update it accordingly by substituting both **${host}**, **${name}** and **${domain}**:
 ```
 applications:
-- host: ${unique name/host}
+- host: ${host}
   disk: 256M
-  name: ${unique name/host}
+  name: ${name}
   path: ./WebContent
   domain: ${domain}
   mem: 256M
@@ -350,18 +358,9 @@ Now you are ready to deploy the application:
 cf p
 ```
 
-Once staging has completed check that all services are bound:
-```
-cf s
-```
-
-Check application is running:
-```
-cf a
-```
+Once staging has completed you should be able to run the application *on your on IBM Cloud environment*.
 
 ### Running the Application
 
-Copy urls columns content. It should be **${unique name/host}.${domain}** (e.g.:myapp.eu-gb.mybluemix.net).
+Copy urls columns content. It should be **${host}.${domain}** (e.g.:**mylastname-mycompagny.eu-gb.mybluemix.net**).
 Paste it in a Web brower and check application is running.
-
