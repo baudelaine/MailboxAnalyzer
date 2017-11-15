@@ -1,9 +1,9 @@
 applications:
-- host: ${unique name/host}
+- host: mailboxanalyzer
   disk: 256M
-  name: ${unique name/host}
+  name: app0
   path: ./WebContent
-  domain: ${domain}
+  domain: baudelaine.eu-gb.mybluemix.net
   mem: 256M
   instances: 1
   services:

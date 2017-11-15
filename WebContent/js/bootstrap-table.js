@@ -526,8 +526,7 @@
         cellStyle: undefined,
         searchable: true,
         searchFormatter: true,
-        cardVisible: true,
-        escape : false
+        cardVisible: true
     };
 
     BootstrapTable.EVENTS = {
@@ -811,12 +810,13 @@
                     sprintf(' rowspan="%s"', column.rowspan),
                     sprintf(' colspan="%s"', column.colspan),
                     sprintf(' data-field="%s"', column.field),
+                    "tabindex='0'",
                     '>');
 
                 html.push(sprintf('<div class="th-inner %s">', that.options.sortable && column.sortable ?
                     'sortable both' : ''));
 
-                text = that.options.escape ? escapeHTML(column.title) : column.title;
+                text = column.title;
 
                 if (column.checkbox) {
                     if (!that.options.singleSelect && that.options.checkboxHeader) {
@@ -1392,7 +1392,7 @@
                     } else {
                         active = page === that.options.pageSize ? ' class="active"' : '';
                     }
-                    pageNumber.push(sprintf('<li role="menuitem"%s><a href="#">%s</a></li>', active, page));
+                    pageNumber.push(sprintf('<li role="menuitem"%s><a href="javascript:void(0)">%s</a></li>', active, page));
                 }
             });
             pageNumber.push('</ul></span>');
@@ -1403,7 +1403,7 @@
             html.push('</div>',
                 '<div class="pull-' + this.options.paginationHAlign + ' pagination">',
                 '<ul class="pagination' + sprintf(' pagination-%s', this.options.iconSize) + '">',
-                '<li class="page-pre"><a href="#">' + this.options.paginationPreText + '</a></li>');
+                '<li class="page-pre"><a href="javascript:void(0)">' + this.options.paginationPreText + '</a></li>');
 
             if (this.totalPages < 5) {
                 from = 1;
@@ -1424,7 +1424,7 @@
             if (this.totalPages >= 6) {
                 if (this.options.pageNumber >= 3) {
                     html.push('<li class="page-first' + (1 === this.options.pageNumber ? ' active' : '') + '">',
-                        '<a href="#">', 1, '</a>',
+                        '<a href="javascript:void(0)">', 1, '</a>',
                         '</li>');
 
                     from++;
@@ -1435,7 +1435,7 @@
                         from--;
                     } else {
                         html.push('<li class="page-first-separator disabled">',
-                            '<a href="#">...</a>',
+                            '<a href="javascript:void(0)">...</a>',
                             '</li>');
                     }
 
@@ -1461,14 +1461,14 @@
 
             for (i = from; i <= to; i++) {
                 html.push('<li class="page-number' + (i === this.options.pageNumber ? ' active' : '') + '">',
-                    '<a href="#">', i, '</a>',
+                    '<a href="javascript:void(0)">', i, '</a>',
                     '</li>');
             }
 
             if (this.totalPages >= 8) {
                 if (this.options.pageNumber <= (this.totalPages - 4)) {
                     html.push('<li class="page-last-separator disabled">',
-                        '<a href="#">...</a>',
+                        '<a href="javascript:void(0)">...</a>',
                         '</li>');
                 }
             }
@@ -1476,13 +1476,13 @@
             if (this.totalPages >= 6) {
                 if (this.options.pageNumber <= (this.totalPages - 3)) {
                     html.push('<li class="page-last' + (this.totalPages === this.options.pageNumber ? ' active' : '') + '">',
-                        '<a href="#">', this.totalPages, '</a>',
+                        '<a href="javascript:void(0)">', this.totalPages, '</a>',
                         '</li>');
                 }
             }
 
             html.push(
-                '<li class="page-next"><a href="#">' + this.options.paginationNextText + '</a></li>',
+                '<li class="page-next"><a href="javascript:void(0)">' + this.options.paginationNextText + '</a></li>',
                 '</ul>',
                 '</div>');
         }
@@ -1558,13 +1558,11 @@
         this.$toolbar.find('.page-size').text(this.options.pageSize);
 
         this.updatePagination(event);
-        return false;
     };
 
     BootstrapTable.prototype.onPageFirst = function (event) {
         this.options.pageNumber = 1;
         this.updatePagination(event);
-        return false;
     };
 
     BootstrapTable.prototype.onPagePre = function (event) {
@@ -1574,7 +1572,6 @@
             this.options.pageNumber--;
         }
         this.updatePagination(event);
-        return false;
     };
 
     BootstrapTable.prototype.onPageNext = function (event) {
@@ -1584,13 +1581,11 @@
             this.options.pageNumber++;
         }
         this.updatePagination(event);
-        return false;
     };
 
     BootstrapTable.prototype.onPageLast = function (event) {
         this.options.pageNumber = this.totalPages;
         this.updatePagination(event);
-        return false;
     };
 
     BootstrapTable.prototype.onPageNumber = function (event) {
@@ -1599,7 +1594,6 @@
         }
         this.options.pageNumber = +$(event.currentTarget).text();
         this.updatePagination(event);
-        return false;
     };
 
     BootstrapTable.prototype.initRow = function(item, i, data, parentDom) {
@@ -1659,7 +1653,7 @@
 
         if (!this.options.cardView && this.options.detailView) {
             html.push('<td>',
-                '<a class="detail-icon" href="#">',
+                '<a class="detail-icon" href="javascript:">',
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.detailOpen),
                 '</a>',
                 '</td>');
@@ -1689,10 +1683,6 @@
 
             if (that.options.cardView && (!column.cardVisible)) {
                 return;
-            }
-
-            if (column.escape) {
-                value_ = escapeHTML(value_);
             }
 
             style = sprintf('style="%s"', csses.concat(that.header.styles[j]).join('; '));
@@ -1875,8 +1865,8 @@
             // remove and update
             if ($tr.next().is('tr.detail-view')) {
                 $this.find('i').attr('class', sprintf('%s %s', that.options.iconsPrefix, that.options.icons.detailOpen));
-                that.trigger('collapse-row', index, row);
                 $tr.next().remove();
+                that.trigger('collapse-row', index, row);
             } else {
                 $this.find('i').attr('class', sprintf('%s %s', that.options.iconsPrefix, that.options.icons.detailClose));
                 $tr.after(sprintf('<tr class="detail-view"><td colspan="%s"></td></tr>', $tr.find('td').length));
@@ -1888,7 +1878,6 @@
                 that.trigger('expand-row', index, row, $element);
             }
             that.resetView();
-            return false;
         });
 
         this.$selectItem = this.$body.find(sprintf('[name="%s"]', this.options.selectItemName));
@@ -2791,6 +2780,8 @@
         }
         if (params && params.pageNumber) {
             this.options.pageNumber = params.pageNumber;
+        } else {
+            this.options.pageNumber = 1;
         }
         if (params && params.pageSize) {
             this.options.pageSize = params.pageSize;

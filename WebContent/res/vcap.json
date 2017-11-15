@@ -2,10 +2,11 @@
   "discovery": [
    {
     "credentials": {
-     "password": "fgQv8kXaGeTV",
-     "url": "https://gateway.watsonplatform.net/discovery/api",
-     "username": "0d89ce47-c0d8-45ef-9b95-4bb8ccca0621"
-    },
+ "url": "https://gateway.watsonplatform.net/discovery/api",
+  "username": "c1472371-cd87-44d1-b109-1a470b4e4996",
+  "password": "yePZ7Pk3Olex"
+}
+,
     "label": "discovery",
     "name": "dsc0",
     "plan": "lite",
@@ -23,10 +24,11 @@
   "natural-language-understanding": [
    {
     "credentials": {
-     "password": "paLS0XknmNOt",
-     "url": "https://gateway.watsonplatform.net/natural-language-understanding/api",
-     "username": "b78492d1-7d81-4b50-8ff0-5488161d47c2"
-    },
+ "password": "FOogagFMblsQ",
+ "url": "https://gateway.watsonplatform.net/natural-language-understanding/api",
+ "username": "a3d019e9-e028-4754-80a0-e203f37809d5"
+}
+,
     "label": "natural-language-understanding",
     "name": "nlu0",
     "plan": "free",
@@ -44,9 +46,9 @@
   "tone_analyzer": [
    {
     "credentials": {
-     "password": "IQ55seEbNr0D",
      "url": "https://gateway.watsonplatform.net/tone-analyzer/api",
-     "username": "c30fda4e-74dd-48f7-9398-ad3c11dfa685"
+  "username": "da8ea80a-0978-433c-84d0-04f7fb5c05aa",
+  "password": "aZsrjcB6rnI3"
     },
     "label": "tone_analyzer",
     "name": "ta0",
@@ -66,8 +68,8 @@
    {
     "credentials": {
      "api_key": "c837b42bc182da29aa29e2647752f88492089ea2",
-     "note": "This is your previous free key. If you want a different one, please wait 24 hours after unbinding the key and try again.",
-     "url": "https://gateway-a.watsonplatform.net/visual-recognition/api"
+ "note": "This is your previous free key. If you want a different one, please wait 24 hours after unbinding the key and try again.",
+ "url": "https://gateway-a.watsonplatform.net/visual-recognition/api"
     },
     "label": "watson_vision_combined",
     "name": "wvc0",

@@ -145,6 +145,7 @@ public class ContextListener implements ServletContextListener {
 		String url = "";
 		String username = "";
 		String password = "";
+		String version = props.getProperty("NLU_VERSION").split("=")[1];
 		
 		Map<String, Object> input = mapper.readValue(vcap_services, new TypeReference<Map<String, Object>>(){});
 		
@@ -162,7 +163,8 @@ public class ContextListener implements ServletContextListener {
 			}
 		}
 		
-		nlu = new NaturalLanguageUnderstanding(NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27, username, password);
+//		nlu = new NaturalLanguageUnderstanding(NaturalLanguageUnderstanding.VERSION_DATE_2017_02_27, username, password);
+		nlu = new NaturalLanguageUnderstanding(version, username, password);
 		nlu.setEndPoint(url);
 		
 		System.out.println(nlu.getName() + " " + nlu.getEndPoint());
